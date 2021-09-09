@@ -1,25 +1,63 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import me from "./assets/me.jpg";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./App.css";
+import ProfileCard from "./components/ProfileCard/ProfileCard";
+
+class App extends Component {
+  state = {
+    Person: {
+      fullName: "Feriany Ahmed",
+      bio: "My bio",
+      imgSrc: me,
+      profession: "Developer",
+    },
+    show: true,
+    count: 0,
+    id: 0,
+  };
+
+  handelShow = () => {
+    this.setState({ show: !this.state.show });
+  };
+  handelTime = () => {
+    this.setState({ count: 0 });
+    const id = setInterval(() => {
+      this.setState((prev) => ({ count: prev.count + 1 }));
+    }, 1000);
+    this.setState({ id });
+  };
+
+  render() {
+    return (
+      <div>
+        <div className="log">
+          {!this.state.show && (
+            <div>last seen in {this.state.count} seconds</div>
+          )}
+        </div>
+
+        <div className="count"> {this.state.show && this.state.count} </div>
+        {this.state.show && (
+          <ProfileCard
+            Person={this.state.Person}
+            id={this.state.id}
+            handelTime={this.handelTime.bind(this)}
+          ></ProfileCard>
+        )}
+
+        <div class="wrapper">
+          <button href="" class="wave-btn" onClick={this.handelShow}>
+            <span class="wave-btn__text">
+              {" "}
+              {this.state.show ? "hide" : "show"}{" "}
+            </span>
+            <span class="wave-btn__waves"></span>
+          </button>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
