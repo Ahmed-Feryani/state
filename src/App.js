@@ -46,13 +46,13 @@ class App extends Component {
           ></ProfileCard>
         )}
 
-        <div class="wrapper">
-          <button href="" class="wave-btn" onClick={this.handelShow}>
-            <span class="wave-btn__text">
+        <div className="wrapper">
+          <button href="" className="wave-btn" onClick={this.handelShow}>
+            <span className="wave-btn__text">
               {" "}
               {this.state.show ? "hide" : "show"}{" "}
             </span>
-            <span class="wave-btn__waves"></span>
+            <span className="wave-btn__waves"></span>
           </button>
         </div>
       </div>
